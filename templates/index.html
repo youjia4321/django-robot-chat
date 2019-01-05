@@ -1,0 +1,88 @@
+<html>
+{% load staticfiles %}
+
+<head>
+    <title>chat UI</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="author" content="https://blog.csdn.net/q475254344">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/icon36.png' %}">
+    <link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+</head>
+<script>
+    document.getElementsByTagName('body').height = window.innerHeight;
+</script>
+
+<body class="box">
+    <div class="leftbar">
+        <ul>
+            <li><i class="fas fa-user"></i></li>
+            <li><i class="fas fa-users"></i></li>
+            <li><i class="fas fa-smile"></i></li>
+            <li><i class="fas fa-envelope"></i></li>
+            <li><i class="fas fa-bell"></i></li>
+            <li><i class="fas fa-calendar-alt"></i></li>
+            <li><i class="fas fa-power-off"></i></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="chatbox">
+            <div class="chatleft">
+                <div class="top">
+                    <i class="fas fa-bars" style="font-size: 1.4em"></i>
+                    <!-- <input type="text" placeholder="search" style="width: 140px; height: 36px; margin-left: 25px;"> -->
+                    &nbsp;&nbsp;<a href="{% url 'search' %}"><button class="sendbtn">record</button></a>
+                    <!-- <a href="/"><button class="searchbtn"><i class="fas fa-search"></i></button></a> -->
+                    <a href="/"><button class="searchbtn">chat</button></a>&nbsp;&nbsp;
+                </div>
+                <div class="center">
+                    <ul>
+                        <li>
+                            <img style="border-radius: 20px; vertical-align: middle;" src="{% static 'images/icon36.png' %}" width="40px">
+                            <span style="margin-left: 10px;">机器人口娃</span>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="chatright">
+                <div class="top">
+                    <img style="border-radius: 20px; vertical-align: middle;" src="{% static 'images/icon36.png' %}" width="40px">
+                    <span style="margin-left: 20px;">机器人口娃</span>
+                    <i  style="font-size: 1.4em; position: absolute; right: 20px; color: gray;"><a href="{% url 'logout' %}"><button class="sendbtn">logout</button></a></i>
+                </div>
+                {% block content %}
+                {% if recevie %}
+                <div class="center">
+                    <ul>
+
+                        <li class="msgright">
+                            <p class="msgcard">{{ comment }}</p>
+                        </li>
+                        <li class="msgleft">
+                            <img style="border-radius: 20px; vertical-align: top;" src="{% static 'images/icon36.png' %}" width="40px">
+                            <p class="msgcard">{{ recevie }}</p>
+                        </li>
+
+                    </ul>
+                </div>
+                {% else %}
+                <div class="center">
+
+                </div>
+                {% endif %}
+                <div class="footer">
+                    <form method="post" action="{% url 'index' %}">
+                        {% csrf_token %}
+                        <textarea name="comment" maxlength="800" rows="5" cols="40" style="width: 100%; resize: none; border: none; "
+                            placeholder="请在此输入要发送的内容..."></textarea>
+                        <button class="sendbtn">发送</button>
+                    </form>
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

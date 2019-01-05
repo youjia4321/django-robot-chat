@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block content %} 
+<div class="center" style="height: 90%">
+    {% for chat in all_chats %}
+    <ul>
+   
+    <li class="msgleft">
+        <p class="msgcard">{{ chat.chat_comment }} </p>
+        <p style="font-size: 10px;">{{ chat.send_time | date:"Y/m/d  H:i:s" }}</p>
+    </li>
+   
+    </ul>
+    {% endfor %}
+</div> 
+{% endblock %}
