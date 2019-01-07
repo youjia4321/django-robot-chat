@@ -38,7 +38,7 @@ def refresh_captcha(request):
 
 def get_response(info):
         # 调用图灵机器人API
-        url = 'http://www.tuling123.com/openapi/api?key=80baea7bc2fb422bbba097909952e90c&info=' + info
+        url = 'http://www.tuling123.com/openapi/api?key=(your robot key)&info=' + info
         res = requests.get(url)
         res.encoding = 'utf-8'
         jd = json.loads(res.text)
